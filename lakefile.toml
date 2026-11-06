@@ -1,0 +1,10 @@
+name = "aoc2026"
+version = "0.1.0"
+defaultTargets = ["aoc2026"]
+
+[[lean_lib]]
+name = "Aoc2026"
+
+[[lean_exe]]
+name = "aoc2026"
+root = "Main"
