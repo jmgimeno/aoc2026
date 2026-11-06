@@ -6,9 +6,11 @@ open Aoc2026
 namespace Examples2025.Day01
 
 /-! ## Day 01: `Vec<(char, i32)>` → structure + `FromStr` -/
+/-- `steps` is a `Nat` because a distance cannot be negative, so a line like `R-5` is
+rejected while parsing. The proof of part 2 relies on this. -/
 structure Move where
   dir : Char
-  steps : Int
+  steps : Nat
 
 def parseDir (c : Char) : Except String Char :=
   match c with
@@ -22,7 +24,7 @@ Beware of blank lines: `"".front` does not fail, it returns a default character,
 so an empty line reports the misleading `invalid direction: A`. -/
 def Move.parse (l : String) : Except String Move := do
   let dir ← parseDir l.front
-  let steps ← parseAs Int (l.drop 1).toString
+  let steps ← parseAs Nat (l.drop 1).toString
   return { dir, steps }
 
 instance : FromStr Move := ⟨Move.parse⟩
@@ -34,7 +36,7 @@ inside the `match`. So `"Xa"` reports the integer error, not the direction one.
 
 instance : FromStr Move where
   fromStr l := do
-    let n ← parseAs Int (l.drop 1).toString
+    let n ← parseAs Nat (l.drop 1).toString
     match l.front with
     | 'R' => return ⟨'R', n⟩
     | 'L' => return ⟨'L', n⟩
@@ -64,6 +66,7 @@ def example1 := "L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82"
 #guard (parseLines Move (linesOf example1)).toOption.map part1 == some 3
 #guard (parseLines Move (linesOf example1)).toOption.map part2 == some 6
 #guard (parseLines Move #["R1", "X2"]).toOption.isNone
+#guard (parseLines Move #["R-5"]).toOption.isNone
 #eval (parseLines Move #["R1", "X2"]).map (·.size)
 
 def parseInput (input : String) : Except String (Array Move) :=

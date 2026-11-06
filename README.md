@@ -185,7 +185,11 @@ From then on, the tests protect the solution against later changes to shared cod
 
 ## Proofs
 
-`Examples2025/Day01Verified.lean` and `Examples2025/Day05Verified.lean` show the difference
-between computing an answer and proving it correct. They verify part of those days, not the
-whole solutions: neither the parsers nor the link between a specification and the puzzle
-statement are proved.
+`Examples2025/Day01Part1Verified.lean`, `Examples2025/Day01Part2Verified.lean` and
+`Examples2025/Day05Verified.lean` show the difference between computing an answer and proving
+it correct.
+
+The two day 1 files import `Day01.lean`, so their theorems are about the solution that
+actually runs. `Day05Verified.lean` still verifies a separate model of `merge`. In all of
+them, neither the parsers nor the link between a specification and the puzzle statement are
+proved.
