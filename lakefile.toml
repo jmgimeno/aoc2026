@@ -1,6 +1,7 @@
 name = "aoc2026"
 version = "0.1.0"
 defaultTargets = ["aoc2026"]
+testDriver = "tests"
 
 [[lean_lib]]
 name = "Aoc2026"
@@ -8,3 +9,14 @@ name = "Aoc2026"
 [[lean_exe]]
 name = "aoc2026"
 root = "Main"
+
+[[lean_exe]]
+name = "tests"
+root = "Tests"
+
+[[lean_exe]]
+name = "downloader"
+root = "Downloader"
+
+[[lean_lib]]
+name = "Examples2025"
