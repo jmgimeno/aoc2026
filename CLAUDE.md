@@ -39,7 +39,10 @@ of experience with AoC in Java, Scala, Python and Rust.
 ## Lean pitfalls on this toolchain
 
 - `Array` only updates in place when the reference is unique. Keeping the old value in a
-  loop copies the whole array on every write.
+  loop copies the whole array on every write. So does mentioning it later in the same
+  expression, even in an unused `match` branch. Only timing catches this, not tests.
+- Tuples have no `Ord` instance: use a structure with `deriving Ord`.
+- A definition must come before its uses in the file. There are no forward declarations.
 - `Lean.RBMap` is deprecated: use `Std.TreeMap`. `HashMap.empty` does not exist: use `{}` or
   `emptyWithCapacity`.
 - `trimAscii` and `drop` return slices, so add `.toString`. `String.lines` returns an iterator.
@@ -61,5 +64,6 @@ of experience with AoC in Java, Scala, Python and Rust.
   pins `UnicodeBasic` to `6e48acac…`.
 - The 2025 ports have only been tested with the statement examples, not the real inputs.
 - A 2026 schedule was not confirmed. Since 2025 the format has been 12 puzzles.
-- `Heap` and BFS helpers do not exist yet. The owner wants to write those themselves.
+- `MaxHeap` exists in `Aoc2026/Util/MaxHeap.lean`, but there is no min-heap and no BFS helper
+  yet. The owner wants to write those themselves.
 - No generator for new days: they are created by hand, on purpose.

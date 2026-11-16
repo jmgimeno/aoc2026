@@ -34,6 +34,7 @@ Aoc2026/            2026 solutions
   Util/Parse.lean   input reading and parsing
   Util/Solution.lean  the common shape of a day
   Util/Grid.lean    two-dimensional grids and positions
+  Util/MaxHeap.lean priority queue on an array
 Aoc2026.lean        imports every module of the library
 Main.lean           runs one day and prints its answers
 Examples2025/       reference ports of the 2025 solutions, some with proofs
