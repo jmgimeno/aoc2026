@@ -55,8 +55,11 @@ nothing if `i` is not a position of `data` other than the root.
 
 The dependent `if h :` gives a proof of the bounds, and `hp` adds what `parent` computes, so
 Lean proves both indices valid without `Option`. The recursion stops because the position
-halves on each call, which Lean checks with `termination_by` and `decreasing_by`. -/
-private def heapUp [Ord α] (data : Array α) (i : Nat) : Array α :=
+halves on each call, which Lean checks with `termination_by` and `decreasing_by`.
+
+Internal: use `push`. It is not `private` only so that `MaxHeapVerified.lean` can prove
+things about it. -/
+def heapUp [Ord α] (data : Array α) (i : Nat) : Array α :=
   if h : 1 < i ∧ i ≤ data.size then
     let p := parent i
     have hp : 1 ≤ p ∧ p < i := by simp only [p, parent]; omega
@@ -85,8 +88,11 @@ larger child. Does nothing if `i` is not a position of `data` with children.
 
 The larger child is chosen together with a proof that it is a valid position below `i`, as a
 subtype `{c // ...}`. That way `c` is a plain variable, and `decreasing_by` can use the proof
-to show that `data.size - i` decreases. -/
-private def heapDown [Ord α] (data : Array α) (i : Nat) : Array α :=
+to show that `data.size - i` decreases.
+
+Internal: use `pop?` or `heapify`. It is not `private` only so that `MaxHeapVerified.lean`
+can prove things about it. -/
+def heapDown [Ord α] (data : Array α) (i : Nat) : Array α :=
   let l := left i
   let r := right i
   if h : 1 ≤ i ∧ l ≤ data.size then

@@ -4,3 +4,4 @@ import Aoc2026.Util.Parse
 import Aoc2026.Util.Solution
 import Aoc2026.Util.Grid
 import Aoc2026.Util.MaxHeap
+import Aoc2026.Util.MaxHeapVerified
